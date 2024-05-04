@@ -13,10 +13,14 @@ public class PlayerController : MonoBehaviour
     public bool grounded;                   // is the player currently standing on the ground?
     public float stunDuration;              // duration of a stun
     private float stunStartTime;            // time that the player was stunned
+    public GameObject textStunned;          // text for stunned
                                             // components
     public Rigidbody2D rig;                 // Rigidbody2D component
     public Animator anim;                   // Animator component
     public ParticleSystem jetpackParticle;  // ParticleSystem of jetpack
+
+    public GameObject pausePanel;
+    public GameManager gameManager;
 
 
     // Start is called before the first frame update
@@ -89,6 +93,7 @@ public class PlayerController : MonoBehaviour
         rig.velocity = Vector2.down * 3;
         stunStartTime = Time.time;
         jetpackParticle.Stop();
+        
     }
 
     //check input dari user untuk mengontrol playernya
@@ -118,11 +123,14 @@ public class PlayerController : MonoBehaviour
         //Apakah playernya terStun?
         if(curState == PlayerState.Stunned)
         {
+            textStunned.SetActive(true);
             //durasi player terkena stun
-            if(Time.time - stunStartTime >= stunDuration)
+            if (Time.time - stunStartTime >= stunDuration)
             {
-                curState = PlayerState.Stunned;
+                curState = PlayerState.Idle;
+                textStunned.SetActive(false);
             }
+            
         }
     }
 
@@ -136,6 +144,28 @@ public class PlayerController : MonoBehaviour
             {
                 Stun();
             }
+        }
+    }
+
+    public void PressPause()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape) && gameManager.remainingTime > 0.0f)
+        {
+            PausePlayerGame();
+        }
+    }
+
+    public void PausePlayerGame()
+    {
+        if (!pausePanel.activeInHierarchy)
+        {
+            pausePanel.SetActive(true);
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            pausePanel.SetActive(false);
+            Time.timeScale = 1f;
         }
     }
 }

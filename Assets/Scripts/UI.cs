@@ -11,6 +11,8 @@ public class UI : MonoBehaviour
 
     public Image remainingTimeDial; //remaining time dengan image yang tadi
     public float remainingTimeDialRate; // 1.0 / time per problem
+    public GameObject canvasWin;
+    public GameObject canvasLose;
 
     public Text endText; //text yang akan ditampilkan di tengah (Menang atau Kalah)
     // Start is called before the first frame update
@@ -68,12 +70,14 @@ public class UI : MonoBehaviour
         //apakah playernya menang?
         if (win)
         {
+            canvasWin.SetActive(true);
             endText.text = "Anda Menang";
             endText.color = Color.green;
         }
         //apakah playernya kalah?
         else
         {
+            canvasLose.SetActive(true);
             endText.text = "Anda Kalah";
             endText.color = Color.red;
         }

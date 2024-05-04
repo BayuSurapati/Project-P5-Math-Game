@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        player.PressPause();
         remainingTime -= Time.deltaTime;
         
         //apakah waktu yang tersisa sudah habis?
