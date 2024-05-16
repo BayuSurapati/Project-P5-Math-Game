@@ -23,6 +23,11 @@ public class PlayerController : MonoBehaviour
     public GameManager gameManager;
 
 
+
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
     // Start is called before the first frame update
 
     // moves the player horizontally

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class UI : MonoBehaviour
     public float remainingTimeDialRate; // 1.0 / time per problem
     public GameObject canvasWin;
     public GameObject canvasLose;
+    public GameObject canvasControl;
+    public string sceneMain;
 
     public Text endText; //text yang akan ditampilkan di tengah (Menang atau Kalah)
     // Start is called before the first frame update
@@ -81,5 +84,15 @@ public class UI : MonoBehaviour
             endText.text = "Anda Kalah";
             endText.color = Color.red;
         }
+    }
+
+    public void ButtonRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ButtonMainMenu()
+    {
+        SceneManager.LoadScene(sceneMain);
     }
 }
